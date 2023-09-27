@@ -9,6 +9,10 @@ class UserForm extends Component {
       {}
     );
     console.log(formData);
+
+    if (this.props.onSubmit) {
+      this.props.onSubmit(formData);
+    }
   };
 
   setRef = (node) => {
