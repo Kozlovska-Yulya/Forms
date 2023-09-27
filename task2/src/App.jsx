@@ -5,7 +5,6 @@ class App extends Component {
   createUser = (data) => {
     console.log(data);
   };
-
   render() {
     return <UserForm onSubmit={this.createUser} />;
   }
