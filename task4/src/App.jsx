@@ -1,17 +1,17 @@
 import React from 'react';
-import User from './User';
+import UsersList from './UsersList';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <ul className="users">
-          <User name="Tad" age="18" />
-          <User name="Anna" age="45" />
-        </ul>
-      </div>
-    );
-  }
-}
+const App = () => {
+  const users = [
+    { name: 'Tad', age: 18 },
+    { name: 'Anna', age: 45 },
+  ];
+
+  return (
+    <div>
+      <UsersList users={users} />
+    </div>
+  );
+};
 
 export default App;

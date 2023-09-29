@@ -29,14 +29,14 @@ class UsersList extends Component {
           count={filteredUsers.length}
           onChange={this.handleFilterChange}
         />
-        <div className="users">
+        <ul className="users">
           {filteredUsers.map((user, index) => (
-            <div className="user" key={index}>
+            <li className="user" key={index}>
               <span className="user__name">{user.name}</span>
               <span className="user__age">{user.age}</span>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     );
   }
