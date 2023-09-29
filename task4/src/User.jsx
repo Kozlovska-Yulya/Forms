@@ -1,12 +1,15 @@
 import React from 'react';
 
-const User = ({ name, age }) => {
-  return (
-    <div className="user">
-      <span className="user__name">{name}</span>
-      <span className="user__age">{age}</span>
-    </div>
-  );
-};
+class User extends React.Component {
+  render() {
+    const { name, age } = this.props;
+    return (
+      <li className="user">
+        <span className="user__name">{name}</span>
+        <span className="user__age">{age}</span>
+      </li>
+    );
+  }
+}
 
 export default User;
