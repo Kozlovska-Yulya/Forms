@@ -23,6 +23,7 @@ class UsersList extends Component {
       filteredUsers: filteredUsers,
     });
   };
+
   render() {
     return (
       <div>
