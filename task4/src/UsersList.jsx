@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Filter from './Filter';
+import User from './User';
 
 class UsersList extends Component {
   constructor(props) {
@@ -7,34 +8,29 @@ class UsersList extends Component {
 
     this.state = {
       filterText: '',
+      users: this.props.users,
     };
   }
 
-  handleFilterChange = (filterText) => {
-    this.setState({ filterText });
+  handleFilterChange = (event) => {
+    this.setState({
+      filterText: event.target.value,
+      users: this.props.users.filter((user) =>
+        user.name.toLowerCase().includes(event.target.value.toLowerCase())
+      ),
+    });
   };
-
   render() {
-    const { users } = this.props;
-    const { filterText } = this.state;
-
-    const filteredUsers = users.filter((user) =>
-      user.name.toLowerCase().includes(filterText.toLowerCase())
-    );
-
     return (
       <div>
         <Filter
-          filterText={filterText}
-          count={filteredUsers.length}
+          filterText={this.filterText}
+          count={this.state.users.length}
           onChange={this.handleFilterChange}
         />
         <ul className="users">
-          {filteredUsers.map((user, index) => (
-            <li className="user" key={index}>
-              <span className="user__name">{user.name}</span>
-              <span className="user__age">{user.age}</span>
-            </li>
+          {this.state.users.map((user, index) => (
+            <User key={index} {...user} />
           ))}
         </ul>
       </div>
