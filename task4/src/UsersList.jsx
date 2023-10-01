@@ -8,16 +8,19 @@ class UsersList extends Component {
 
     this.state = {
       filterText: '',
-      users: this.props.users,
+      filteredUsers: this.props.users,
     };
   }
 
   handleFilterChange = (event) => {
+    const newText = event.target.value;
+    const filteredUsers = this.props.users.filter((user) =>
+      user.name.toLowerCase().includes(newText.toLowerCase())
+    );
+
     this.setState({
-      filterText: event.target.value,
-      users: this.props.users.filter((user) =>
-        user.name.toLowerCase().includes(event.target.value.toLowerCase())
-      ),
+      filterText: newText,
+      filteredUsers: filteredUsers,
     });
   };
   render() {
@@ -25,11 +28,11 @@ class UsersList extends Component {
       <div>
         <Filter
           filterText={this.state.filterText}
-          count={this.state.users.length}
+          count={this.state.filteredUsers.length}
           onChange={this.handleFilterChange}
         />
         <ul className="users">
-          {this.state.users.map((user, index) => (
+          {this.state.filteredUsers.map((user, index) => (
             <User key={index} {...user} />
           ))}
         </ul>
