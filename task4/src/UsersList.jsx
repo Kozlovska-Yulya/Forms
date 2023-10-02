@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Filter from './Filter';
+import User from './User';
 
 class UsersList extends Component {
   constructor(props) {
@@ -10,31 +11,27 @@ class UsersList extends Component {
     };
   }
 
-  handleFilterChange = (filterText) => {
-    this.setState({ filterText });
+  handleFilterChange = (event) => {
+    this.setState({
+      filterText: event.target.value.toLowerCase(),
+    });
   };
 
   render() {
     const { users } = this.props;
     const { filterText } = this.state;
 
-    const filteredUsers = users.filter((user) =>
-      user.name.toLowerCase().includes(filterText.toLowerCase())
-    );
+    // Фильтруем пользователей на основе введенного текст
 
+    const usersToDisplay = users.filter(({ name }) =>
+      name.toLowerCase().includes(filterText)
+    );
     return (
       <div>
-        <Filter
-          filterText={filterText}
-          count={filteredUsers.length}
-          onChange={this.handleFilterChange}
-        />
+        <Filter />
         <ul className="users">
-          {filteredUsers.map((user, index) => (
-            <li className="user" key={index}>
-              <span className="user__name">{user.name}</span>
-              <span className="user__age">{user.age}</span>
-            </li>
+          {usersToDisplay.map((user, index) => (
+            <User key={index} {...user} />
           ))}
         </ul>
       </div>
